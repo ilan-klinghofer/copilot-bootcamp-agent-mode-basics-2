@@ -15,9 +15,32 @@
     "test:backend": "npm run test --workspace=backend",
     "install:all": "npm install && npm run install:frontend && npm run install:backend",
     "install:frontend": "cd packages/frontend && npm install",
-    "install:backend": "cd packages/backend && npm install"
+    "install:backend": "cd packages/backend && npm install",
+    "lint": "npm run lint:frontend && npm run lint:backend",
+    "lint:frontend": "npm run lint --workspace=frontend",
+    "lint:backend": "npm run lint --workspace=backend",
+    "lint:fix": "npm run lint:fix:frontend && npm run lint:fix:backend",
+    "lint:fix:frontend": "npm run lint:fix --workspace=frontend",
+    "lint:fix:backend": "npm run lint:fix --workspace=backend",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.5.3"
+  },
+  "lint-staged": {
+    "packages/frontend/src/**/*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "packages/backend/src/**/*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "**/*.{json,md,css}": [
+      "prettier --write"
+    ]
   }
 }

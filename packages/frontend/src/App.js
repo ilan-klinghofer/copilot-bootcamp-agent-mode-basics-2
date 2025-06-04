@@ -61,7 +61,7 @@ function App() {
         <h1>Hello World</h1>
         <p>Connected to in-memory database</p>
       </header>
-      
+
       <main>
         <section className="add-item-section">
           <h2>Add New Item</h2>
@@ -83,9 +83,7 @@ function App() {
           {!loading && !error && (
             <ul>
               {data.length > 0 ? (
-                data.map((item) => (
-                  <li key={item.id}>{item.name}</li>
-                ))
+                data.map((item) => <li key={item.id}>{item.name}</li>)
               ) : (
                 <p>No items found. Add some!</p>
               )}

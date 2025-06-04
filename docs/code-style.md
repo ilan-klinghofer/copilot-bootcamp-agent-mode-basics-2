@@ -41,6 +41,7 @@ Organize imports in the following order, with a blank line between each group:
 4. CSS/SCSS and other assets
 
 Example:
+
 ```javascript
 // External dependencies
 import React, { useState, useEffect } from 'react';
@@ -71,6 +72,7 @@ For React components, follow this organization:
 5. Export statement
 
 Example:
+
 ```javascript
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
@@ -82,15 +84,15 @@ import './Button.css';
  */
 function Button({ text, variant, onClick }) {
   const [isPressed, setIsPressed] = useState(false);
-  
+
   const handleClick = () => {
     setIsPressed(true);
     onClick();
     setTimeout(() => setIsPressed(false), 200);
   };
-  
+
   return (
-    <button 
+    <button
       className={`btn btn-${variant} ${isPressed ? 'btn-pressed' : ''}`}
       onClick={handleClick}
     >
@@ -122,10 +124,11 @@ export default Button;
 - Document side effects and any assumptions
 
 Example:
+
 ```javascript
 /**
  * Fetches user data from the API.
- * 
+ *
  * @param {string} userId - The ID of the user to fetch
  * @param {Object} options - Additional options for the request
  * @param {boolean} options.includeProfile - Whether to include profile data
@@ -164,7 +167,15 @@ For more guidance on testing, see the [Testing Practices](./testing-practices.md
 
 ## Linting and Formatting
 
-This project uses ESLint and Prettier to enforce code style. Always run linting before committing code:
+This project uses ESLint and Prettier to enforce code style. The configuration is set up in the following files:
+
+- `.eslintrc.js` - ESLint configuration for each package
+- `.prettierrc` - Prettier configuration for consistent formatting
+- `.editorconfig` - Editor configuration for consistent spacing and line endings
+
+### Running Linting Commands
+
+Always run linting before committing code:
 
 ```bash
 npm run lint
@@ -175,3 +186,21 @@ To automatically fix lint issues:
 ```bash
 npm run lint:fix
 ```
+
+### VS Code Integration
+
+The project includes VS Code settings that automatically format code on save and run ESLint fix operations. Make sure you have the following extensions installed:
+
+- ESLint
+- Prettier - Code formatter
+- EditorConfig for VS Code
+
+### Pre-commit Hooks
+
+The project uses Husky and lint-staged to automatically run linting before each commit. This ensures that all code committed to the repository adheres to the style guidelines.
+
+When you commit code, the following will happen automatically:
+
+1. ESLint will check and fix JavaScript/JSX files
+2. Prettier will format all supported files
+3. If there are any unfixable issues, the commit will be prevented
