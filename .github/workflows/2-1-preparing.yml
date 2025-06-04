@@ -10,9 +10,6 @@ permissions:
   actions: write
   issues: write
 
-env:
-  STEP_2_FILE: ".github/steps/2-2-delete.md"
-
 jobs:
   find_exercise:
     name: Find Exercise Issue
@@ -62,7 +59,7 @@ jobs:
         with:
           template-file: exercise-toolkit/markdown-templates/step-feedback/step-results-table.md
           template-vars: |
-            step_number: 1
+            step_number: 2-1
             passed: ${{ !contains(steps.*.outcome, 'failure') }}
             results_table:
               - description: "The text 'Hello World' should appear in the file packages/frontend/src/App.js"
@@ -89,7 +86,7 @@ jobs:
         with:
           template-file: exercise-toolkit/markdown-templates/step-feedback/step-finished-prepare-next-step.md
           template-vars: |
-            next_step_number: 2
+            next_step_number: 2-2
 
       - name: Update comment - step finished
         run: |
@@ -120,7 +117,7 @@ jobs:
       - name: Create comment - add step content
         run: |
           gh issue comment "$ISSUE_URL" \
-            --body-file "$STEP_2_FILE"
+            --body-file ".github/steps/2-2-delete.md"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
