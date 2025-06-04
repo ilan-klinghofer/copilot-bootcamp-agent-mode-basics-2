@@ -45,6 +45,7 @@ jobs:
 
       - name: Check for ESLint config
         id: check-eslint-config
+        continue-on-error: true
         run: |
           if [ ! -f .eslintrc.js ] && [ ! -f .eslintrc.json ] && [ ! -f .eslintrc ]; then
             echo "No ESLint config found!" && exit 1
@@ -52,6 +53,7 @@ jobs:
       
       - name: Check for Prettier config
         id: check-prettier-config
+        continue-on-error: true
         run: |
           if [ ! -f .prettierrc ] && [ ! -f .prettierrc.js ] && [ ! -f .prettierrc.json ]; then
             echo "No Prettier config found!" && exit 1
@@ -59,11 +61,13 @@ jobs:
 
       - name: Check for lint script in root package.json
         id: check-lint-script
+        continue-on-error: true
         run: |
           grep '"lint"' package.json || (echo "No lint script in root package.json!" && exit 1)
 
       - name: Run lint
         id: run-lint
+        continue-on-error: true
         run: npm run lint
 
       - name: Build message - step results
