@@ -47,15 +47,21 @@ jobs:
         id: check-eslint-config
         continue-on-error: true
         run: |
-          if [ ! -f .eslintrc.js ] && [ ! -f .eslintrc.json ] && [ ! -f .eslintrc ]; then
-            echo "No ESLint config found!" && exit 1
+          # Check for ESLint configs in packages using find command
+          if find packages -name ".eslintrc*" | grep -q .; then
+            echo "ESLint config found in packages!"
+          else
+            echo "No ESLint config found in packages!" && exit 1
           fi
-      
+
       - name: Check for Prettier config
         id: check-prettier-config
         continue-on-error: true
         run: |
-          if [ ! -f .prettierrc ] && [ ! -f .prettierrc.js ] && [ ! -f .prettierrc.json ]; then
+          # Check for Prettier configs in root directory or in packages using find command
+          if find . -maxdepth 1 -name ".prettierrc*" | grep -q . || find packages -name ".prettierrc*" | grep -q .; then
+            echo "Prettier config found!"
+          else
             echo "No Prettier config found!" && exit 1
           fi
 
@@ -64,6 +70,11 @@ jobs:
         continue-on-error: true
         run: |
           grep '"lint"' package.json || (echo "No lint script in root package.json!" && exit 1)
+
+      - name: Install dependencies
+        id: install-deps
+        continue-on-error: true
+        run: npm ci || npm install
 
       - name: Run lint
         id: run-lint
@@ -79,9 +90,9 @@ jobs:
             step_number: 2-3
             passed: ${{ !contains(steps.*.outcome, 'failure') }}
             results_table:
-              - description: "An ESLint config file should exist in the root directory"
+              - description: "ESLint configuration files should exist in the packages"
                 passed: ${{ steps.check-eslint-config.outcome == 'success' }}
-              - description: "A Prettier config file should exist in the root directory"
+              - description: "Prettier configuration files should exist (either at root or in packages)"
                 passed: ${{ steps.check-prettier-config.outcome == 'success' }}
               - description: "A lint script should be defined in the root package.json"
                 passed: ${{ steps.check-lint-script.outcome == 'success' }}
@@ -114,7 +125,7 @@ jobs:
       - name: Update comment - step finished
         run: |
           gh issue comment "$ISSUE_URL" \
-            --body "$ISSUE_BODY" \
+            --body "$ISSUE_BODY"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_BODY: ${{ steps.build-message-step-finish.outputs.updated-text }}
