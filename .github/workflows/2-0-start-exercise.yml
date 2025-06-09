@@ -65,9 +65,22 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Disable current workflow and enable next one
+      - name: Disable all workflows
         run: |
-          gh workflow disable "Step 2-0"
+          # Find all workflow files and extract their names
+          for workflow_file in .github/workflows/*.yml; do
+            # Extract the workflow name from the file
+            workflow_name=$(grep "^name:" "$workflow_file" | head -1 | sed 's/name: *//' | sed 's/ *#.*//')
+
+            # Skip Step 2-0 (current workflow) to avoid disabling itself
+            if [[ "$workflow_name" != "Step 2-0" ]]; then
+              echo "Disabling workflow: $workflow_name"
+              gh workflow disable "$workflow_name" || echo "Failed to disable $workflow_name or it's already disabled"
+            fi
+          done
+
+      - name: Enable next workflow
+        run: |
           gh workflow enable "Step 2-1"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
