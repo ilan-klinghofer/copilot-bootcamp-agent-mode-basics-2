@@ -3,7 +3,7 @@ name: Step 3-1 # Create vanilla table
 on:
   push:
     branches:
-      - main
+      - lesson-3
 
 permissions:
   contents: read
@@ -11,7 +11,7 @@ permissions:
   issues: write
 
 env:
-  STEP_3_FILE: ".github/steps/3-2-add-mui-instructions.md"
+  STEP_3_FILE: '.github/steps/3-2-add-mui-instructions.md'
 
 jobs:
   find_exercise:

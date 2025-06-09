@@ -3,7 +3,7 @@ name: Step 2-2 # Verify Delete Functionality
 on:
   push:
     branches:
-      - main
+      - lesson-2
 
 permissions:
   contents: read

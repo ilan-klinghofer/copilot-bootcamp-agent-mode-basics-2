@@ -3,7 +3,7 @@ name: Step 2-1 # Verify Title Change
 on:
   push:
     branches:
-      - main
+      - lesson-2
 
 permissions:
   contents: read

@@ -3,7 +3,7 @@ name: Step 2-3 # Verify Linting Setup
 on:
   push:
     branches:
-      - main
+      - lesson-2
 
 permissions:
   contents: read
