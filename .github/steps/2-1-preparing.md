@@ -87,4 +87,4 @@ Now, let's use GitHub Copilot's Agent Mode to change the application title:
 - You can customize your codespace by adjusting VS Code settings
 - The terminal is fully functional and supports all standard commands
 - Changes are automatically saved to your codespace
-- If you close your browser, your codespace will still be available when you return
+- If you close your browser, your codespace will still be available when you return.
