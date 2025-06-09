@@ -5,6 +5,7 @@ Welcome to the Copilot Bootcamp! In this first step, you'll set up your developm
 ### What is GitHub Codespaces?
 
 **GitHub Codespaces** is a cloud development environment that allows you to:
+
 - Code directly in your browser without any local setup
 - Access a fully configured Visual Studio Code environment
 - Run and test your applications in the cloud
@@ -28,6 +29,7 @@ Having a consistent development environment ensures all bootcamp participants ha
 1. Wait for your codespace to start. This may take a few moments as GitHub sets up a fresh development environment for you.
 
 1. When the codespace is ready, you'll see a Visual Studio Code interface in your browser. This environment includes:
+
    - All required dependencies pre-installed
    - The project code already cloned and ready to use
    - VS Code extensions needed for the bootcamp pre-configured
@@ -54,15 +56,18 @@ Having a consistent development environment ensures all bootcamp participants ha
 
 Now, let's use GitHub Copilot's Agent Mode to change the application title:
 
+1. In VS Code, create a new branch named `lesson-2`
+
 1. In VS Code, open Github Copilot.
 
 1. At the bottom of the Copilot panel, in the 'Ask Copilot' text box, click on the dropdown menu (next to the send button) and select **Agent** mode.
 
 1. In the same dropdown menu, click the model selector (it might say "GPT-4o" or another model name) and select **Claude 3.7 Sonnet** from the list.
+
    - **IMPORTANT: If you don't see a model selector dropdown, first type something into the GitHub Copilot chat to initialize Copilot**
 
 1. In the Copilot chat input field at the bottom of the panel, type the following prompt:
-   
+
    ```
    Change the title of the main screen from "React Frontend with Node Backend" to "Hello World"
    ```
@@ -73,7 +78,7 @@ Now, let's use GitHub Copilot's Agent Mode to change the application title:
 
 1. Review the changes made by Copilot and select 'Keep' for each change, or press the 'Keep' button in the copilot sidebar to accept all changes.
 
-1. Commit and push your changes to the main branch
+1. Commit and push your changes to the `lesson-2` branch
 
 1. Now that your changes are pushed to GitHub, Mona should already be busy checking your work. Give her a moment and keep watch in the comments. You will see her respond with progress info and the next lesson.
 
